@@ -7,11 +7,11 @@ from flask import Flask, abort
 
 app = Flask(__name__)
 
-
+# pylint: disable=too-few-public-methods
 @app.route('/counter_state/<int:pid>', methods=['GET'])
 def counter_state(pid):
     """
-    API endpoint for reading the information of a process.
+    API endpoint for reading the information of a process
     """
     file_path = os.environ.get('FILE_PATH', '/proc/%i/io')
     try:

@@ -1,6 +1,7 @@
 ''' unit tests for the server endpoints in the `src.server` module.
 
-The tests include scenarios for the `/counter_state` endpoint, which retrieves the counter state for a given process ID.
+The tests include scenarios for the `/counter_state` endpoint, 
+which retrieves the counter state for a given process ID.
 '''
 
 import os
@@ -8,7 +9,7 @@ import pytest
 from src.server import app
 
 # proc/1/io valid file content
-# proc/2/io wrong value type 
+# proc/2/io wrong value type
 # proc/3/io permission denied
 # proc/4/io missing the write_bytes key
 
