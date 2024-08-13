@@ -12,7 +12,7 @@ from src.server import app
 # proc/3/io permission denied
 # proc/4/io missing the write_bytes key
 
-@pytest.fixture
+@pytest.fixture(name="client")
 def test_client():
     """
     A context manager that provides a test client for the Flask application.
