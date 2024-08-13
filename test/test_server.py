@@ -1,3 +1,8 @@
+''' unit tests for the server endpoints in the `src.server` module.
+
+The tests include scenarios for the `/counter_state` endpoint, which retrieves the counter state for a given process ID.
+'''
+
 import os
 import pytest
 from src.server import app
@@ -8,13 +13,21 @@ from src.server import app
 # proc/4/io missing the write_bytes key
 
 @pytest.fixture
-def client():
+def test_client():
+    """
+    A context manager that provides a test client for the Flask application.
+    """
+
     app.config['TESTING'] = True
     os.environ['FILE_PATH'] = './test/proc/%i/io'
     with app.test_client() as client:
         yield client
 
 def test_counter_state(client):
+    """
+    Test the counter state endpoint with different scenarios.
+    """
+
     # Test case 1: Valid process ID
     response = client.get('/counter_state/1')
     assert response.status_code == 200
@@ -24,8 +37,8 @@ def test_counter_state(client):
     response = client.get('/counter_state/456')
     assert response.status_code == 404
 
-    # TODO: Pre steps needed to setup a file without read permissions
-    # # Test case 3: Permission denied
+    # TODO: Pre steps needed to setup a file without read permissions  # pylint: disable=fixme
+    # Test case 3: Permission denied
     # response = client.get('/counter_state/3')
     # assert response.status_code == 403
 

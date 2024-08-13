@@ -7,14 +7,15 @@ from flask import Flask, abort
 
 app = Flask(__name__)
 
+
 @app.route('/counter_state/<int:pid>', methods=['GET'])
 def counter_state(pid):
     """
     API endpoint for reading the information of a process.
     """
-    FILE_PATH = os.environ.get('FILE_PATH', '/proc/%i/io')
+    file_path = os.environ.get('FILE_PATH', '/proc/%i/io')
     try:
-        file_name = FILE_PATH % pid
+        file_name = file_path % pid
         state = read_counter_state(file_name)
     except KeyError as e:
         abort(422, description=f"Key {e} not found in file content")
